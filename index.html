@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CineTrack — Track every watch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="toast" class="toast"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="logo">CINE<span class="logo-accent">TRACK</span></span>
+    <div class="nav-links" id="navLinks" hidden>
+      <button class="nav-link active" data-view="browse">Browse</button>
+      <button class="nav-link" data-view="mylist">My list</button>
+      <button class="nav-link logout" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+</nav>
+
+<section id="hero" class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">A watchlist that actually remembers</p>
+    <h1 class="hero-title">Track every watch.<br>Rate every story.</h1>
+    <p class="hero-sub">CineTrack is a small, self-hosted API and UI for logging what you're watching, what you've finished, and what you thought of it.</p>
+    <button class="btn btn-primary" id="getStartedBtn">Get started</button>
+  </div>
+  <div class="hero-strip" aria-hidden="true"></div>
+</section>
+
+<section id="auth" class="auth-section" hidden>
+  <div class="auth-card">
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login">Log in</button>
+      <button class="auth-tab" data-tab="register">Register</button>
+    </div>
+
+    <form id="loginForm" class="auth-form">
+      <label>Email
+        <input type="email" name="email" required autocomplete="email">
+      </label>
+      <label>Password
+        <input type="password" name="password" required autocomplete="current-password">
+      </label>
+      <button type="submit" class="btn btn-primary btn-block">Log in</button>
+    </form>
+
+    <form id="registerForm" class="auth-form" hidden>
+      <label>Email
+        <input type="email" name="email" required autocomplete="email">
+      </label>
+      <label>Password
+        <input type="password" name="password" required minlength="8" autocomplete="new-password">
+        <span class="field-hint">At least 8 characters</span>
+      </label>
+      <button type="submit" class="btn btn-primary btn-block">Create account</button>
+    </form>
+  </div>
+</section>
+
+<main id="app" hidden>
+
+  <section id="browseView" class="view">
+    <div class="view-header">
+      <h2>Browse</h2>
+      <button class="btn btn-outline" id="addMovieBtn">+ Add a movie</button>
+    </div>
+
+    <form id="addMovieForm" class="inline-form" hidden>
+      <input type="text" name="title" placeholder="Title" required>
+      <input type="text" name="genre" placeholder="Genre">
+      <input type="number" name="release_year" placeholder="Year" min="1900" max="2100">
+      <button type="submit" class="btn btn-primary">Add</button>
+      <button type="button" class="btn btn-ghost" id="cancelAddMovie">Cancel</button>
+    </form>
+
+    <div id="movieGrid" class="movie-grid"></div>
+    <p id="emptyMovies" class="empty-state" hidden>No movies yet. Add the first one above.</p>
+  </section>
+
+  <section id="mylistView" class="view" hidden>
+    <div class="view-header">
+      <h2>My list</h2>
+    </div>
+    <div id="watchlistItems" class="watchlist-list"></div>
+    <p id="emptyWatchlist" class="empty-state" hidden>Your list is empty. Add movies from Browse.</p>
+  </section>
+
+</main>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
