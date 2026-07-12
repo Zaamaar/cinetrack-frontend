@@ -352,3 +352,15 @@ main { max-width: 1100px; margin: 0 auto; padding: 40px 24px 100px; }
 @media (prefers-reduced-motion: reduce) {
   .movie-card, .toast { transition: none; }
 }
+
+/* Auth page header + cross-link (Log in <-> Register) */
+.auth-card-header { padding: 24px 24px 8px; }
+.auth-card-header h2 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: 0.5px;
+  margin: 0 0 10px;
+}
+.auth-switch { font-size: 13px; color: var(--text-muted); margin: 0; }
+.auth-switch a { color: var(--gold); text-decoration: none; font-weight: 600; }
+.auth-switch a:hover { text-decoration: underline; }

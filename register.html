@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CineTrack — Log in</title>
+<title>CineTrack — Register</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -22,7 +22,7 @@
   <div class="hero-inner">
     <p class="eyebrow">A watchlist that actually remembers</p>
     <h1 class="hero-title">Track every watch.<br>Rate every story.</h1>
-    <p class="hero-sub">Log what you're watching, what you've finished, and what you thought of it.</p>
+    <p class="hero-sub">No feed, no algorithm — just your list.</p>
   </div>
   <div class="hero-strip" aria-hidden="true"></div>
 </section>
@@ -30,18 +30,19 @@
 <section class="auth-section">
   <div class="auth-card">
     <div class="auth-card-header">
-      <h2>Log in</h2>
-      <p class="auth-switch">New here? <a href="register.html">Create an account</a></p>
+      <h2>Create your account</h2>
+      <p class="auth-switch">Already have one? <a href="index.html">Log in</a></p>
     </div>
 
-    <form id="loginForm" class="auth-form">
+    <form id="registerForm" class="auth-form">
       <label>Email
         <input type="email" name="email" required autocomplete="email">
       </label>
       <label>Password
-        <input type="password" name="password" required autocomplete="current-password">
+        <input type="password" name="password" required minlength="8" autocomplete="new-password">
+        <span class="field-hint">At least 8 characters</span>
       </label>
-      <button type="submit" class="btn btn-primary btn-block">Log in</button>
+      <button type="submit" class="btn btn-primary btn-block">Create account</button>
     </form>
   </div>
 </section>
