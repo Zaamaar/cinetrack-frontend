@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CineTrack — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="toast" class="toast"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="logo">CINE<span class="logo-accent">TRACK</span></span>
+    <div class="nav-links">
+      <button class="nav-link active" data-view="home" type="button">Home</button>
+      <button class="nav-link" data-view="browse" type="button">Browse</button>
+      <button class="nav-link" data-view="mylist" type="button">My list</button>
+    </div>
+    <div class="nav-right">
+      <span class="nav-user" id="navUser"></span>
+      <button class="nav-link logout" id="logoutBtn" type="button">Log out</button>
+    </div>
+  </div>
+</nav>
+
+<header id="banner" class="banner" hidden>
+  <div class="banner-scrim"></div>
+  <div class="banner-content">
+    <p class="eyebrow">Featured</p>
+    <h1 id="bannerTitle" class="banner-title"></h1>
+    <p id="bannerMeta" class="banner-meta"></p>
+    <button id="bannerAddBtn" class="btn btn-primary">+ Add to my list</button>
+  </div>
+</header>
+
+<main>
+
+  <section id="homeView" class="view">
+    <div id="homeRows"></div>
+    <p id="emptyHome" class="empty-state" hidden>No movies yet. Head to Browse and add the first one.</p>
+  </section>
+
+  <section id="browseView" class="view" hidden>
+    <div class="view-header">
+      <h2>Browse</h2>
+      <button class="btn btn-outline" id="addMovieBtn" type="button">+ Add a movie</button>
+    </div>
+    <div id="movieGrid" class="poster-grid"></div>
+    <p id="emptyMovies" class="empty-state" hidden>No movies yet. Add the first one above.</p>
+  </section>
+
+  <section id="mylistView" class="view" hidden>
+    <div class="view-header">
+      <h2>My list</h2>
+    </div>
+    <div id="watchlistGrid" class="poster-grid"></div>
+    <p id="emptyWatchlist" class="empty-state" hidden>Your list is empty. Add movies from Browse.</p>
+  </section>
+
+</main>
+
+<div id="addMovieModal" class="modal-backdrop" hidden>
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Add a movie</h3>
+      <button class="modal-close" id="closeAddMovie" type="button" aria-label="Close">&times;</button>
+    </div>
+    <form id="addMovieForm" class="modal-form">
+      <label>Title
+        <input type="text" name="title" required>
+      </label>
+      <label>Genre
+        <input type="text" name="genre" placeholder="e.g. Sci-fi">
+      </label>
+      <label>Release year
+        <input type="number" name="release_year" min="1900" max="2100">
+      </label>
+      <button type="submit" class="btn btn-primary btn-block">Add movie</button>
+    </form>
+  </div>
+</div>
+
+<div id="detailModal" class="modal-backdrop" hidden>
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="detailTitle"></h3>
+      <button class="modal-close" id="closeDetail" type="button" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div id="detailPoster" class="detail-poster"></div>
+      <p id="detailMeta" class="detail-meta"></p>
+
+      <div id="detailInList" class="detail-controls" hidden>
+        <label class="detail-label">Status
+          <select id="detailStatus" class="status-select">
+            <option value="planned">Planned</option>
+            <option value="watching">Watching</option>
+            <option value="completed">Completed</option>
+          </select>
+        </label>
+        <label class="detail-label">Your rating</label>
+        <div class="stars" id="detailStars"></div>
+        <button class="btn btn-ghost remove-btn" id="detailRemoveBtn" type="button">Remove from my list</button>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="detailAddBtn" type="button">+ Add to my list</button>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="api.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>
