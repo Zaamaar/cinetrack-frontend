@@ -14,6 +14,9 @@
   --font-body: 'Inter', sans-serif;
 }
 
+/* Critical: without this, any component that sets its own `display` value
+   on the same element as the `hidden` attribute silently overrides it,
+   because author-origin rules beat the user-agent default for [hidden]. */
 [hidden] { display: none !important; }
 
 * { box-sizing: border-box; }
@@ -33,6 +36,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, .nav-link:focus
   outline-offset: 2px;
 }
 
+/* Nav */
 .nav {
   position: sticky;
   top: 0;
@@ -58,7 +62,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, .nav-link:focus
 }
 .logo-accent { color: var(--accent); }
 .nav-links { display: flex; align-items: center; gap: 4px; flex: 1; }
-.nav-right { display: flex; align-items: center; gap: 16px; margin-left: auto; }
+.nav-right { display: flex; align-items: center; gap: 16px; margin-left: auto; flex-shrink: 0; }
 .nav-user { color: var(--text-muted); font-size: 13px; }
 .nav-link {
   background: none;
@@ -75,6 +79,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, .nav-link:focus
 .nav-link.active { color: var(--text); background: var(--surface-raised); }
 .nav-link.logout { color: var(--accent); }
 
+/* Hero (landing page) */
 .hero {
   position: relative;
   max-width: 1100px;
@@ -117,6 +122,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, .nav-link:focus
 }
 @media (max-width: 720px) { .hero-strip { display: none; } }
 
+/* Buttons */
 .btn {
   font-size: 14px;
   font-weight: 600;
@@ -137,6 +143,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, .nav-link:focus
 .btn-block { width: 100%; }
 .btn-lg { padding: 14px 30px; font-size: 15px; }
 
+/* Auth (landing page) */
 .auth-section {
   max-width: 1100px;
   margin: 0 auto;
@@ -152,16 +159,19 @@ button:focus-visible, input:focus-visible, select:focus-visible, .nav-link:focus
   border-radius: 16px;
   padding: 8px;
 }
-.auth-card-header { padding: 24px 24px 8px; }
-.auth-card-header h2 {
-  font-family: var(--font-display);
-  font-size: 26px;
-  letter-spacing: 0.5px;
-  margin: 0 0 10px;
+.auth-tabs { display: flex; gap: 4px; padding: 8px; }
+.auth-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
 }
-.auth-switch { font-size: 13px; color: var(--text-muted); margin: 0; }
-.auth-switch a { color: var(--gold); text-decoration: none; font-weight: 600; }
-.auth-switch a:hover { text-decoration: underline; }
+.auth-tab.active { background: var(--surface-raised); color: var(--text); }
 .auth-form { display: flex; flex-direction: column; gap: 16px; padding: 16px 20px 24px; }
 .auth-form label {
   display: flex;
@@ -182,6 +192,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, .nav-link:focus
 .auth-form input:focus { border-color: var(--gold); outline: none; }
 .field-hint { color: #6E6E71; font-size: 12px; font-weight: 400; }
 
+/* Dashboard banner */
 .banner {
   position: relative;
   height: 340px;
@@ -211,6 +222,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, .nav-link:focus
 }
 .banner-meta { color: var(--text-muted); margin: 0 0 20px; font-size: 14px; }
 
+/* Main app */
 main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
 .view-header {
   display: flex;
@@ -225,6 +237,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
   margin: 0;
 }
 
+/* Poster grid (Browse, My list) */
 .poster-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -234,7 +247,6 @@ main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
 .poster-art {
   position: relative;
   aspect-ratio: 2 / 3;
-  width: 100%;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--border);
@@ -250,9 +262,34 @@ main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
   box-shadow: 0 16px 32px rgba(0,0,0,0.5);
   z-index: 2;
 }
+
+/* Home rows (horizontal, Netflix-style) */
+.row { margin-bottom: 36px; }
+.row-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  margin: 0 0 14px;
+}
+.poster-row {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 6px 4px 16px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.poster-row::-webkit-scrollbar { height: 6px; }
+.poster-row::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.poster-card.row-card {
+  flex: 0 0 auto;
+  width: 160px;
+}
 .poster-initials {
   font-family: var(--font-display);
-  font-size: 44px;
+  font-size: 52px;
   color: rgba(255,255,255,0.35);
   letter-spacing: 1px;
 }
@@ -277,30 +314,6 @@ main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
 .poster-title { font-weight: 600; font-size: 13px; margin: 0 0 2px; color: #fff; }
 .poster-meta { font-size: 11px; color: rgba(255,255,255,0.65); margin: 0; }
 
-.row { margin-bottom: 36px; }
-.row-title {
-  font-family: var(--font-display);
-  font-size: 22px;
-  letter-spacing: 0.5px;
-  margin: 0 0 14px;
-}
-.poster-row {
-  display: flex;
-  gap: 14px;
-  overflow-x: auto;
-  overflow-y: visible;
-  padding: 6px 4px 16px;
-  scroll-behavior: smooth;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
-}
-.poster-row::-webkit-scrollbar { height: 6px; }
-.poster-row::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-.poster-card.row-card {
-  flex: 0 0 auto;
-  width: 160px;
-}
-
 .empty-state {
   color: var(--text-muted);
   text-align: center;
@@ -308,6 +321,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
   font-size: 14px;
 }
 
+/* Modals */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -400,6 +414,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
 .star-btn.filled { color: var(--gold); }
 .remove-btn { margin-top: 4px; font-size: 13px; }
 
+/* Toast */
 .toast {
   position: fixed;
   bottom: 24px;
@@ -424,7 +439,43 @@ main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
   .poster-art, .toast { transition: none; }
 }
 
+/* Tablet: tighten spacing before things get cramped */
+@media (max-width: 900px) {
+  .nav-inner { gap: 16px; }
+  .nav-link { padding: 8px 10px; }
+}
+
+/* Mobile: keep every nav action reachable — scroll instead of hiding it */
 @media (max-width: 640px) {
-  .nav-links { display: none; }
-  .banner { height: 260px; }
+  .nav-inner { padding: 12px 16px; gap: 10px; }
+  .nav-links {
+    flex: 1 1 auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+    justify-content: flex-start;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link {
+    padding: 8px 12px;
+    font-size: 13px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .nav-user {
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .banner { height: 220px; }
+  .banner-content { padding: 0 16px 28px; }
+  main { padding: 28px 16px 80px; }
+  .auth-section { padding: 40px 16px 80px; }
+  .modal-backdrop { padding: 12px; }
+}
+
+/* Small phones: the 150px poster minimum gets tight below ~380px */
+@media (max-width: 380px) {
+  .poster-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  .poster-card.row-card { width: 130px; }
 }
