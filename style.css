@@ -445,24 +445,43 @@ main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
   .nav-link { padding: 8px 10px; }
 }
 
-/* Mobile: keep every nav action reachable — scroll instead of hiding it */
+/* Mobile: split into two rows instead of cramming everything into one line */
 @media (max-width: 640px) {
-  .nav-inner { padding: 12px 16px; gap: 10px; }
+  .nav-inner {
+    flex-wrap: wrap;
+    padding: 12px 16px 10px;
+    gap: 6px 10px;
+  }
+  .logo { font-size: 20px; }
+  .nav-right {
+    order: 2;
+    margin-left: auto;
+    gap: 10px;
+  }
   .nav-links {
-    flex: 1 1 auto;
+    order: 3;
+    flex: 1 1 100%;
+    width: 100%;
     overflow-x: auto;
     scrollbar-width: none;
-    justify-content: flex-start;
+    gap: 6px;
+    margin-top: 2px;
+    -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+    mask-image: linear-gradient(to right, black 90%, transparent 100%);
   }
   .nav-links::-webkit-scrollbar { display: none; }
   .nav-link {
-    padding: 8px 12px;
+    padding: 7px 14px;
     font-size: 13px;
     white-space: nowrap;
     flex-shrink: 0;
+    border-radius: 20px;
+    background: var(--surface);
   }
+  .nav-link.active { background: var(--surface-raised); }
+  .nav-link.logout { padding-left: 10px; padding-right: 10px; }
   .nav-user {
-    max-width: 80px;
+    max-width: 110px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
