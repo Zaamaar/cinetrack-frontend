@@ -486,7 +486,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 100px; }
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .banner { height: 220px; }
+  .banner { height: 280px; }
   .banner-content { padding: 0 16px 28px; }
   main { padding: 28px 16px 80px; }
   .auth-section { padding: 40px 16px 80px; }
